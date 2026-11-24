@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="node_modules/@fontsource/unbounded/700.css">
+<link rel="stylesheet" href="node_modules/@fontsource/unbounded/800.css">
+<link rel="stylesheet" href="node_modules/@fontsource/manrope/500.css">
+<link rel="stylesheet" href="node_modules/@fontsource/manrope/600.css">
+<link rel="stylesheet" href="node_modules/@fontsource/manrope/700.css">
+<style>
+  :root{
+    --bg:#15141b; --amber:#F5B841; --white:#F4F4F6; --text:#D3D5DC; --muted:#8E93A0;
+    --magenta:#D83F87; --purple:#7B4BE0; --coral:#E98074; --card:rgba(255,255,255,0.055); --line:rgba(255,255,255,0.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#000}
+  .slide{
+    width:1080px;height:1350px;position:relative;overflow:hidden;
+    background:
+      radial-gradient(620px 520px at 100% 0%, rgba(28,120,128,0.42), transparent 70%),
+      radial-gradient(560px 480px at 0% 100%, rgba(120,32,70,0.40), transparent 70%),
+      radial-gradient(520px 420px at 100% 100%, rgba(110,30,60,0.30), transparent 70%),
+      var(--bg);
+    color:var(--white);font-family:'Manrope',sans-serif;
+    padding:96px 92px 0 92px;margin-bottom:20px;
+  }
+  .top{display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:20px;font-family:'Unbounded';font-weight:700;font-size:38px;letter-spacing:-0.5px}
+  .count{font-family:'Manrope';font-weight:600;font-size:30px;color:var(--muted)}
+  .label{margin-top:96px;font-family:'Manrope';font-weight:700;font-size:26px;letter-spacing:6px;color:var(--muted);text-transform:uppercase}
+  h1{font-family:'Unbounded';font-weight:800;line-height:1.08;letter-spacing:-1px}
+  h1 .a{color:var(--amber)}
+  .cover h1{font-size:104px;margin-top:34px}
+  .inner h1{font-size:64px;margin-top:28px}
+  .inner .label{margin-top:80px}
+  .lead{margin-top:46px;font-size:40px;line-height:1.38;color:var(--text);font-weight:500}
+  .body{margin-top:40px;font-size:37px;line-height:1.42;color:var(--text);font-weight:500}
+  .foot{position:absolute;left:92px;right:92px;bottom:78px;display:flex;justify-content:space-between;align-items:flex-end}
+  .author{font-size:28px;line-height:1.3}
+  .author b{display:block;font-weight:700;color:var(--white)}
+  .author span{color:var(--muted);font-weight:500}
+  .site{font-family:'Unbounded';font-weight:700;font-size:28px;color:var(--white)}
+  .swipe{font-family:'Unbounded';font-weight:700;font-size:30px;color:var(--amber)}
+  /* notes zigzag */
+  .zig{margin-top:70px;height:250px;position:relative}
+  /* pentatonic */
+  .penta{display:flex;gap:22px;margin-top:64px}
+  .note{flex:1;height:210px;border-radius:28px;background:var(--card);border:2px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+  .note .n{font-family:'Unbounded';font-weight:800;font-size:44px}
+  .note .d{font-size:30px;color:var(--muted);font-weight:700}
+  .note.hl{border-color:rgba(245,184,65,0.55)}
+  /* steps */
+  .steps{margin-top:48px;display:flex;flex-direction:column;gap:20px}
+  .step{display:flex;align-items:center;gap:34px;background:var(--card);border:2px solid var(--line);border-radius:30px;padding:26px 38px}
+  .num{flex:none;width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Unbounded';font-weight:800;font-size:44px;color:#15141b;background:var(--amber)}
+  .step .t{font-family:'Unbounded';font-weight:700;font-size:38px}
+  .step .s{margin-top:8px;font-size:36px;color:var(--text);font-weight:600}
+  /* tempo */
+  .tempo{margin-top:70px}
+  .bars{display:flex;align-items:flex-end;gap:24px;height:330px}
+  .bar{flex:1;border-radius:22px 22px 8px 8px;background:rgba(255,255,255,0.10);position:relative}
+  .bar.o{background:rgba(255,255,255,0.22)}
+  .bar.x{background:linear-gradient(180deg,var(--amber),#E98A3B)}
+  .bar em{position:absolute;top:-58px;left:0;right:0;text-align:center;font-style:normal;font-family:'Unbounded';font-weight:700;font-size:34px}
+  .blabels{display:flex;gap:24px;margin-top:20px}
+  .blabels div{flex:1;text-align:center;font-size:26px;color:var(--muted);font-weight:700;line-height:1.25}
+  /* errors */
+  .errs{margin-top:50px;display:flex;flex-direction:column;gap:30px}
+  .err{border-left:6px solid var(--coral);padding:6px 0 6px 34px}
+  .err b{display:block;font-family:'Unbounded';font-weight:700;font-size:36px;color:var(--white)}
+  .err span{display:block;margin-top:10px;font-size:33px;line-height:1.36;color:var(--text);font-weight:500}
+  .save{margin-top:60px;display:inline-block;padding:26px 40px;border-radius:999px;border:2px solid rgba(245,184,65,0.6);font-family:'Unbounded';font-weight:700;font-size:32px;color:var(--amber)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="vg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8A4DF0"/><stop offset="1" stop-color="#C04BD8"/></linearGradient>
+    <linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E0458F"/><stop offset="1" stop-color="#FF5E8A"/></linearGradient>
+    <symbol id="logo" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#0B0A10"/>
+      <path d="M16 26 L36 74 L52 30" fill="none" stroke="url(#vg)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M50 74 L66 28 L84 74" fill="none" stroke="url(#ag)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- 1 COVER -->
+<section class="slide cover" id="s1">
+  <div class="top"><div class="brand"><svg width="76" height="76"><use href="#logo"/></svg>Vocarena</div><div class="count">1/7</div></div>
+  <div class="label">Статья · мелизмы</div>
+  <h1><span class="a">Мелизмы —</span><br>не дар,<br>а навык</h1>
+  <p class="lead">Как я учу пробежки по нотам: пентатоника, три ступени и запас скорости</p>
+  <div class="foot"><div class="author"><b>Андрей Тихонов</b><span>вокальный педагог</span></div><div class="swipe">Листай →</div></div>
+</section>
+
+<!-- 2 WHAT -->
+<section class="slide inner" id="s2">
+  <div class="top"><div class="brand"><svg width="60" height="60"><use href="#logo"/></svg>Vocarena</div><div class="count">2/7</div></div>
+  <div class="label">Что это</div>
+  <h1><span class="a">Мелизм</span> — несколько нот на один слог</h1>
+  <p class="body">Голос не просто тянет гласную, а пробегает по нотам вверх, вниз или зигзагом. Противоположность — слоговое пение: один слог, одна нота.</p>
+  <div class="zig">
+    <svg width="896" height="250" viewBox="0 0 896 250">
+      <polyline points="40,170 150,90 260,150 370,60 480,120 590,40 700,110 820,190" fill="none" stroke="rgba(245,184,65,0.35)" stroke-width="6" stroke-linejoin="round"/>
+      <g fill="#F5B841">
+        <circle cx="40" cy="170" r="22"/><circle cx="150" cy="90" r="22"/><circle cx="260" cy="150" r="22"/><circle cx="370" cy="60" r="22"/>
+        <circle cx="480" cy="120" r="22"/><circle cx="590" cy="40" r="22"/><circle cx="700" cy="110" r="22"/><circle cx="820" cy="190" r="22"/>
+      </g>
+      <text x="40" y="242" fill="#8E93A0" font-family="Unbounded" font-weight="700" font-size="34">а — — — — — — — — — — — — — —</text>
+    </svg>
+  </div>
+  <div class="foot"><div class="author"><span>Андрей Тихонов</span></div><div class="site">vocarena.ru</div></div>
+</section>
+
+<!-- 3 PENTA -->
+<section class="slide inner" id="s3">
+  <div class="top"><div class="brand"><svg width="60" height="60"><use href="#logo"/></svg>Vocarena</div><div class="count">3/7</div></div>
+  <div class="label">Основа</div>
+  <h1><span class="a">Пентатоника</span> — алфавит мелизмов</h1>
+  <div class="penta">
+    <div class="note"><div class="n">До</div><div class="d">1</div></div>
+    <div class="note"><div class="n">Ре</div><div class="d">2</div></div>
+    <div class="note"><div class="n">Ми</div><div class="d">3</div></div>
+    <div class="note hl"><div class="n">Соль</div><div class="d">5</div></div>
+    <div class="note"><div class="n">Ля</div><div class="d">6</div></div>
+  </div>
+  <p class="body">Пять нот без полутонов между соседями — они не спорят друг с другом. Выучишь пентатонику — и начнёшь ходить по нотам, а не угадывать их.</p>
+  <div class="foot"><div class="author"><span>Андрей Тихонов</span></div><div class="site">vocarena.ru</div></div>
+</section>
+
+<!-- 4 STEPS -->
+<section class="slide inner" id="s4">
+  <div class="top"><div class="brand"><svg width="60" height="60"><use href="#logo"/></svg>Vocarena</div><div class="count">4/7</div></div>
+  <div class="label">Мой лайфхак</div>
+  <h1>Учи мелизм <span class="a">в три ступени</span></h1>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><div><div class="t">Слоги</div><div class="s">«ла-ла-ла» или «шуби-дуби»</div></div></div>
+    <div class="step"><div class="num">2</div><div><div class="t">Мягкое «г»</div><div class="s">«а-га-га-га»</div></div></div>
+    <div class="step"><div class="num">3</div><div><div class="t">Одна гласная</div><div class="s">«а-а-а-а» — настоящий мелизм</div></div></div>
+  </div>
+  <p class="body" style="font-size:33px;margin-top:40px">Не прыгай со слогов сразу на гласную: без второй ступени ноты сливаются в кашу.</p>
+  <div class="foot"><div class="author"><span>Андрей Тихонов</span></div><div class="site">vocarena.ru</div></div>
+</section>
+
+<!-- 5 TEMPO -->
+<section class="slide inner" id="s5">
+  <div class="top"><div class="brand"><svg width="60" height="60"><use href="#logo"/></svg>Vocarena</div><div class="count">5/7</div></div>
+  <div class="label">Как гитарист</div>
+  <h1>Метроном и <span class="a">запас скорости</span></h1>
+  <div class="tempo">
+    <div class="bars">
+      <div class="bar" style="height:40%"><em>50%</em></div>
+      <div class="bar" style="height:56%"><em>70%</em></div>
+      <div class="bar o" style="height:80%"><em>100%</em></div>
+      <div class="bar x" style="height:96%"><em style="color:#F5B841">120%</em></div>
+    </div>
+    <div class="blabels"><div>медленно,<br>нота за нотой</div><div>быстрее</div><div>темп<br>оригинала</div><div style="color:#F5B841">запас<br>+10–20%</div></div>
+  </div>
+  <p class="body" style="font-size:34px">Волнение на сцене съест запас, а не мелизм. И помни: точность важнее скорости.</p>
+  <div class="foot"><div class="author"><span>Андрей Тихонов</span></div><div class="site">vocarena.ru</div></div>
+</section>
+
+<!-- 6 ERRORS -->
+<section class="slide inner" id="s6">
+  <div class="top"><div class="brand"><svg width="60" height="60"><use href="#logo"/></svg>Vocarena</div><div class="count">6/7</div></div>
+  <div class="label">⚠ Частые ошибки</div>
+  <div class="errs">
+    <div class="err"><b>Гонка за скоростью</b><span>Быстрый, но грязный мелизм звучит хуже медленного и точного.</span></div>
+    <div class="err"><b>Сразу на одну гласную</b><span>Без слогов и мягкого «г» ноты сливаются.</span></div>
+    <div class="err"><b>Мелизм только в песне</b><span>Вынимай рисунок и отрабатывай его отдельно.</span></div>
+    <div class="err"><b>Тон вместо полутона</b><span>На скорости легко выйти из тональности.</span></div>
+    <div class="err"><b>Мелизм через зажим</b><span>Зажатые челюсть и гортань гибкости не дадут.</span></div>
+  </div>
+  <div class="foot"><div class="author"><span>Андрей Тихонов</span></div><div class="site">vocarena.ru</div></div>
+</section>
+
+<!-- 7 CTA -->
+<section class="slide inner" id="s7">
+  <div class="top"><div class="brand"><svg width="60" height="60"><use href="#logo"/></svg>Vocarena</div><div class="count">7/7</div></div>
+  <div class="label">Полная версия</div>
+  <h1 style="font-size:78px">Вся статья — <span class="a">на vocarena.ru</span></h1>
+  <p class="body" style="font-size:38px">Ритм внутри мелизма, тон и полутон, план занятия и упражнения — в разделе «Статьи». Ссылка в шапке профиля.</p>
+  <div class="save">Сохрани, чтобы не потерять</div>
+  <div class="foot"><div class="author"><b>Андрей Тихонов</b><span>вокальный педагог, автор Vocarena</span></div><div class="site">vocarena.ru</div></div>
+</section>
+
+</body>
+</html>
